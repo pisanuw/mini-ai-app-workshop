@@ -12,8 +12,10 @@ A one-hour, hands-on session that takes complete beginners from "AI is a mystery
 
 ## Live
 
-- Presentation and resources: served from `index.html` on Netlify
+- Site: https://mini-ai-app-workshop.netlify.app
 - Share your app: https://shareapps.netlify.app/
+
+The site is a direct (manual) Netlify deploy of this repo's contents. It is not wired to Git, so pushes here do not auto-redeploy: redeploy manually, or connect the repo in Netlify for continuous deploys.
 
 ## Notes
 
