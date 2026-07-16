@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building with AI — your take-home guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FCF9F3; --ink:#1E2A32; --ink-soft:#51616A;
+    --marigold:#E39A2E; --teal:#0F7C79; --coral:#E8613C;
+    --line:#DBD2C2; --card:#FFFFFF;
+    --display:"Bricolage Grotesque", system-ui, sans-serif;
+    --body:"Inter", system-ui, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:var(--body); background:var(--paper); color:var(--ink);
+    line-height:1.5; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:3rem 1.5rem 4rem;}
+
+  /* header */
+  header{border-bottom:3px solid var(--ink); padding-bottom:1.4rem; margin-bottom:2.2rem;}
+  .eyebrow{font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); font-size:.8rem; display:flex; align-items:center; gap:.55rem; margin-bottom:.8rem;}
+  .eyebrow::before{content:""; width:26px; height:3px; background:var(--marigold); border-radius:2px;}
+  h1{font-family:var(--display); font-weight:800; font-size:2.6rem; line-height:1; letter-spacing:-.02em;}
+  header p{color:var(--ink-soft); font-size:1.05rem; margin-top:.7rem; max-width:52ch;}
+
+  section{margin-bottom:2.2rem;}
+  h2{font-family:var(--display); font-weight:800; font-size:1.5rem; letter-spacing:-.01em; padding-left:.8rem; border-left:5px solid var(--marigold); margin-bottom:1rem;}
+  h3{font-family:var(--display); font-weight:600; font-size:1.12rem; margin:1.1rem 0 .3rem;}
+  p{margin-bottom:.6rem;}
+  .lead{color:var(--ink-soft);}
+
+  ul.plain{list-style:none;}
+  ul.plain li{padding:.32rem 0 .32rem 1.5rem; position:relative;}
+  ul.plain li::before{content:""; position:absolute; left:0; top:.72em; width:8px; height:8px; border-radius:50%; background:var(--teal);}
+  ul.plain li b{font-weight:600;}
+
+  /* the loop inline */
+  .loop{display:flex; gap:.7rem; flex-wrap:wrap; margin:.4rem 0 .2rem;}
+  .loop .st{flex:1 1 30%; min-width:150px; background:var(--card); border:1.5px solid var(--line); border-radius:12px; padding:.9rem 1rem;}
+  .loop .st b{font-family:var(--display); color:var(--marigold); font-size:1.3rem; display:block;}
+  .loop .st span{font-weight:600;} .loop .st em{font-style:normal; color:var(--ink-soft); font-size:.95rem; display:block;}
+
+  /* recipe */
+  .recipe{background:var(--card); border:1.5px solid var(--line); border-radius:14px; padding:1.2rem 1.4rem;}
+  .recipe .row{display:flex; gap:.8rem; padding:.5rem 0; border-bottom:1px dashed var(--line); align-items:baseline;}
+  .recipe .row:last-child{border-bottom:none;}
+  .recipe .row .num{font-family:var(--display); font-weight:800; color:var(--teal); min-width:1.5ch;}
+  .recipe .row .what{font-weight:600; min-width:11ch;}
+  .recipe .row .ex{color:var(--ink-soft); font-style:italic;}
+  .assembled{margin-top:1rem; background:#FFFDF8; border:1.5px solid var(--marigold); border-radius:12px; padding:1rem 1.2rem; font-size:.98rem;}
+  .assembled b{color:var(--coral);}
+
+  /* prompts / mono blocks */
+  .prompt{background:var(--card); border:1.5px solid var(--line); border-left:5px solid var(--teal); border-radius:0 10px 10px 0; padding:.85rem 1.05rem; margin:.5rem 0 1rem; font-size:.96rem;}
+  .prompt .name{font-family:var(--display); font-weight:600; display:block; margin-bottom:.3rem; color:var(--ink);}
+  .prompt .txt{color:var(--ink-soft);}
+
+  /* magic card */
+  .magic{background:#FFFDF8; border:2.5px solid var(--coral); border-radius:16px; padding:1.6rem 1.5rem; position:relative; margin-top:.6rem;}
+  .magic .pill{position:absolute; top:-.85em; left:1.3rem; background:var(--coral); color:#fff; font-weight:600; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; padding:.18rem .75rem; border-radius:999px;}
+  .magic .fill{font-family:var(--display); font-weight:600; font-size:1.35rem; line-height:2.1;}
+  .fill .u{display:inline-block; border-bottom:2px solid var(--ink); min-width:9ch; height:1.2em;}
+  .examples{margin-top:.4rem;}
+  .examples .ex{padding:.45rem 0; border-bottom:1px dashed var(--line); font-size:.98rem;}
+  .examples .ex:last-child{border-bottom:none;}
+  .examples .ex b{color:var(--coral); font-weight:600;}
+
+  /* menu */
+  .tier{margin-bottom:1.4rem;}
+  .tier .head{display:flex; align-items:baseline; gap:.7rem; margin-bottom:.5rem;}
+  .tier .head .lvl{font-family:var(--display); font-weight:800; font-size:1.2rem;}
+  .tier .head .note{font-size:.82rem; letter-spacing:.05em; text-transform:uppercase; font-weight:600; color:var(--ink-soft);}
+  .tier.easy .lvl{color:var(--teal);} .tier.med .lvl{color:var(--marigold);} .tier.hard .lvl{color:var(--coral);}
+
+  .habits{display:flex; gap:.8rem; flex-wrap:wrap;}
+  .habits .h{flex:1 1 30%; min-width:160px; background:var(--card); border:1.5px solid var(--line); border-radius:12px; padding:1rem;}
+  .habits .h b{font-family:var(--display); font-size:1.15rem; color:var(--teal); display:block; margin-bottom:.2rem;}
+  .habits .h span{color:var(--ink-soft); font-size:.95rem;}
+
+  /* glossary */
+  .gloss dt{font-family:var(--display); font-weight:600; margin-top:.7rem;}
+  .gloss dd{color:var(--ink-soft); margin-left:0;}
+
+  a{color:var(--teal); font-weight:600;}
+  .foot{margin-top:2.5rem; padding-top:1.2rem; border-top:2px solid var(--line); color:var(--ink-soft); font-size:.9rem;}
+
+  @media print{
+    body{background:#fff;}
+    .wrap{padding:0; max-width:100%;}
+    header, .prompt, .recipe, .assembled, .magic, .examples, .loop, .habits{break-inside:avoid;}
+    h2, h3{break-after:avoid;}
+    .tier .head{break-after:avoid;}
+    .gloss dt{break-after:avoid;}
+    .prompt, .recipe, .magic, .loop .st, .habits .h{box-shadow:none;}
+    h1{font-size:2.3rem;}
+    a{color:var(--ink);}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">your take-home guide</div>
+    <h1>Building with AI</h1>
+    <p>Everything from today, in one place. Keep it by your computer. You do not need to remember anything, just come back to this and start typing.</p>
+  </header>
+
+  <section>
+    <h2>Today in one minute</h2>
+    <p class="lead">You described what you wanted in plain English, and Claude built it. That is the whole trick, and it works the same way every time:</p>
+    <div class="loop">
+      <div class="st"><b>1</b><span>Describe it</span><em>Say what you want.</em></div>
+      <div class="st"><b>2</b><span>Claude builds it</span><em>It writes the app.</em></div>
+      <div class="st"><b>3</b><span>You tweak it</span><em>Change, add, repeat.</em></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>AI in plain English</h2>
+    <ul class="plain">
+      <li><b>What it is:</b> an assistant that has read an enormous amount of writing and predicts what should come next, which lets it write things for you.</li>
+      <li><b>What it is great at:</b> explaining, drafting, summarizing, translating, and building simple web apps.</li>
+      <li><b>The catch:</b> it can sound completely sure and still be wrong. (People nickname this a "hallucination.") Check anything that matters.</li>
+      <li><b>Not always current:</b> it may not know very recent news unless it looks it up for you.</li>
+      <li><b>You are in charge:</b> it does what you ask. Clearer asks get better results.</li>
+      <li><b>You cannot break it:</b> experiment freely. Start a fresh chat any time.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>The prompt recipe</h2>
+    <p class="lead">A good ask has five ingredients. Miss one and just add it after.</p>
+    <div class="recipe">
+      <div class="row"><span class="num">1</span><span class="what">Who it is for</span><span class="ex">"for my book club"</span></div>
+      <div class="row"><span class="num">2</span><span class="what">What it should do</span><span class="ex">"track books we have read and our ratings"</span></div>
+      <div class="row"><span class="num">3</span><span class="what">A few details</span><span class="ex">"5 stars, a space for notes"</span></div>
+      <div class="row"><span class="num">4</span><span class="what">How it should look</span><span class="ex">"warm colors, big friendly text"</span></div>
+      <div class="row"><span class="num">5</span><span class="what">Then say build it</span><span class="ex">"now build it as a web app"</span></div>
+    </div>
+    <div class="assembled">
+      <b>Put together:</b> "For my book club, build me a web app that tracks the books we have read with a 5-star rating and a space for notes. Warm colors and big friendly text. Now build it as a web app."
+    </div>
+  </section>
+
+  <section>
+    <h2>Your magic card</h2>
+    <p class="lead">Stuck for where to start? Fill in the three blanks and paste it into Claude.</p>
+    <div class="magic">
+      <span class="pill">fill me in</span>
+      <div class="fill">Build me a <span class="u"></span> that helps me <span class="u"></span>. Make it <span class="u"></span> and easy to read.</div>
+    </div>
+    <h3>Three examples, if you need a spark</h3>
+    <div class="examples">
+      <div class="ex">Build me a <b>countdown</b> that helps me <b>see the days until our cruise</b>. Make it <b>cheerful with a beach feel</b> and easy to read.</div>
+      <div class="ex">Build me a <b>recipe box</b> that helps me <b>save and find our favorite dinners</b>. Make it <b>warm and cozy</b> and easy to read.</div>
+      <div class="ex">Build me a <b>quiz</b> that helps me <b>test the grandkids on family history</b>. Make it <b>colorful and fun</b> and easy to read.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Make it yours: tweak phrases</h2>
+    <p class="lead">After Claude builds something, type any of these to change it. Copy them word for word.</p>
+    <ul class="plain">
+      <li>"Make the text bigger."</li>
+      <li>"Use warmer colors" (or sunset colors, or "my favorite color, teal").</li>
+      <li>"Add a button that says ______."</li>
+      <li>"Add a picture at the top."</li>
+      <li>"Make it work well on my phone."</li>
+      <li>"Add a place for me to type notes."</li>
+      <li>"Put the newest one at the top."</li>
+      <li>"Add a reset button."</li>
+      <li>"Something looks off. Can you fix it?"</li>
+      <li>"Start over, simpler this time."</li>
+    </ul>
+  </section>
+
+  <section class="page-break">
+    <h2>The app menu</h2>
+    <p class="lead">Ready-to-paste prompts. Start with an <b>Easy</b> one today; save the rest for a rainy afternoon.</p>
+
+    <div class="tier easy">
+      <div class="head"><span class="lvl">Easy</span><span class="note">one screen · works right away</span></div>
+      <div class="prompt"><span class="name">Bill &amp; tip splitter</span><span class="txt">Build me a web app that splits a restaurant bill and tip between a few people. Let me type the total, the tip percent, and how many people. Show what each person owes in big, clear numbers.</span></div>
+      <div class="prompt"><span class="name">Countdown</span><span class="txt">Build me a web app that counts down the days to a date I choose. Let me type the event name and the date, and show the days remaining in big friendly text. Cheerful colors.</span></div>
+      <div class="prompt"><span class="name">Dinner decider</span><span class="txt">Build me a web app where I paste a list of our favorite dinners and a button picks one at random. Show the pick in big text with a "pick again" button.</span></div>
+      <div class="prompt"><span class="name">Family trivia quiz</span><span class="txt">Build me a short multiple-choice quiz web app. I will give you 5 questions and their answers. Keep score and show a friendly result at the end.</span></div>
+    </div>
+
+    <div class="tier med">
+      <div class="head"><span class="lvl">Medium</span><span class="note">remembers things in your browser</span></div>
+      <div class="prompt"><span class="name">Recipe box</span><span class="txt">Build me a web app to save my recipes. Let me add a title, ingredients, and steps, then see a list and search it. Remember my recipes in the browser. Warm, cozy look.</span></div>
+      <div class="prompt"><span class="name">Packing checklist</span><span class="txt">Build me a reusable packing checklist web app. Let me add items, tick them off, and clear all the ticks for the next trip. Remember my list. Big checkboxes.</span></div>
+      <div class="prompt"><span class="name">Book or movie log</span><span class="txt">Build me a web app to log books (or movies) with a title, a star rating out of 5, and a note. Show them in a list I can sort by rating. Remember them in the browser.</span></div>
+      <div class="prompt"><span class="name">Garden journal</span><span class="txt">Build me a garden journal web app. Let me log what I planted, the date, and when I last watered it. Show a simple list. Green, natural colors.</span></div>
+    </div>
+
+    <div class="tier hard">
+      <div class="head"><span class="lvl">Hard</span><span class="note">saves or shares with other people</span></div>
+      <div class="prompt"><span class="name">Book club site</span><span class="txt">Build me a book club web app that lists members, shows the current book, and lets everyone add discussion notes that are saved and shared. I want others to see the same notes, so use a database if needed and walk me through the setup step by step.</span></div>
+      <div class="prompt"><span class="name">Family recipe collection (shared)</span><span class="txt">Build me a web app where my whole family can add recipes to a shared collection everyone can see. Save it so it is shared, not just on my computer, and guide me through any setup.</span></div>
+      <div class="prompt"><span class="name">Party RSVP page</span><span class="txt">Build me an RSVP web app for a party. Guests enter their name, say yes or no, and what dish they will bring. Save the responses so I can see the full list, and guide me through sharing it.</span></div>
+      <div class="prompt"><span class="name">Memory-match game</span><span class="txt">Build me a memory-match card game web app that keeps score and has a restart button. Colorful and fun.</span></div>
+    </div>
+    <p class="lead" style="font-size:.92rem;">The Hard ones need to save or share information. When Claude needs that, it may set up a free "database" and give you steps. Go slowly; it will guide you the whole way.</p>
+  </section>
+
+  <section>
+    <h2>Three good habits</h2>
+    <div class="habits">
+      <div class="h"><b>Save it</b><span>Copy your work somewhere. Nothing saves automatically.</span></div>
+      <div class="h"><b>Check facts</b><span>If it matters, verify it. Confident is not the same as correct.</span></div>
+      <div class="h"><b>Start over</b><span>It is free to try again. A fresh start often beats a long fix.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Keep playing at home</h2>
+    <h3>How to get Claude</h3>
+    <p>Open <a href="https://claude.ai">claude.ai</a> in any web browser, or install the Claude app on your phone or computer. A free account lets you try plenty.</p>
+    <h3>Five things to try this week</h3>
+    <ul class="plain">
+      <li>Build one Easy app from the menu.</li>
+      <li>Ask it to explain something you have always wondered about.</li>
+      <li>Have it draft a tricky email or note for you.</li>
+      <li>Ask for a dinner idea using what is in your fridge.</li>
+      <li>Ask it to translate a message to or from another language.</li>
+    </ul>
+    <h3>Want to learn more?</h3>
+    <p>Just keep a chat open and ask, "How do I…?" It is happy to teach you, one step at a time.</p>
+  </section>
+
+  <section>
+    <h2>Mini glossary</h2>
+    <dl class="gloss">
+      <dt>AI</dt><dd>Software that can understand and produce language (and images).</dd>
+      <dt>Claude</dt><dd>The specific AI assistant we used today.</dd>
+      <dt>Prompt</dt><dd>The message you type to ask for something.</dd>
+      <dt>Hallucination</dt><dd>When the AI states something wrong as if it were true.</dd>
+      <dt>Web app</dt><dd>A small program that runs in a web browser.</dd>
+      <dt>Browser</dt><dd>The program you use to visit websites (Chrome, Safari, Edge).</dd>
+      <dt>Host / deploy</dt><dd>Putting your app online so others can open it with a link.</dd>
+      <dt>Database</dt><dd>Where an app stores information so it is saved or shared.</dd>
+    </dl>
+  </section>
+
+  <div class="foot">Building with AI · your take-home guide. Made with Claude.</div>
+
+</div>
+</body>
+</html>

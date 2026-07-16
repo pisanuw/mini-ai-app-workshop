@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building with AI — a hands-on hour</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Fraunces:ital,opsz,wght@1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FCF9F3;
+    --ink:#1E2A32;
+    --ink-soft:#4A5A63;
+    --marigold:#F2A93B;
+    --teal:#0F7C79;
+    --coral:#E8613C;
+    --mist:#EBE4D6;
+    --line:#DAD0BF;
+    --card:#FFFFFF;
+    --display:"Bricolage Grotesque", system-ui, sans-serif;
+    --body:"Inter", system-ui, sans-serif;
+    --accent:"Fraunces", Georgia, serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:var(--body);
+    background:var(--paper);
+    color:var(--ink);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* progress bar */
+  #bar{
+    position:fixed; top:0; left:0; height:5px; width:0%;
+    background:var(--teal); z-index:50; transition:width .35s ease;
+  }
+
+  /* slide shell */
+  .deck{position:relative; height:100vh; width:100vw;}
+  .slide{
+    position:absolute; inset:0;
+    display:none;
+    flex-direction:column; justify-content:center;
+    padding:clamp(2rem,6vw,7rem);
+    opacity:0;
+  }
+  .slide.active{display:flex; opacity:1; animation:rise .5s ease both;}
+  @keyframes rise{from{opacity:0; transform:translateY(18px);} to{opacity:1; transform:none;}}
+
+  .eyebrow{
+    font-family:var(--body); font-weight:600;
+    font-size:clamp(.8rem,1.5vw,1.05rem);
+    letter-spacing:.14em; text-transform:uppercase;
+    color:var(--teal); margin-bottom:1.1rem;
+    display:inline-flex; align-items:center; gap:.6rem;
+  }
+  .eyebrow::before{content:""; width:26px; height:3px; background:var(--marigold); border-radius:2px;}
+
+  h1{
+    font-family:var(--display); font-weight:800;
+    font-size:clamp(2.7rem,7.2vw,6rem); line-height:.98;
+    letter-spacing:-.02em;
+  }
+  h2{
+    font-family:var(--display); font-weight:800;
+    font-size:clamp(2.1rem,5.4vw,4.2rem); line-height:1.02;
+    letter-spacing:-.02em; max-width:16ch;
+  }
+  .sub{
+    font-size:clamp(1.2rem,2.4vw,1.9rem); line-height:1.4;
+    color:var(--ink-soft); max-width:32ch; margin-top:1.4rem;
+    font-weight:400;
+  }
+  .sub strong{color:var(--ink); font-weight:600;}
+
+  /* title slide */
+  #s-title{justify-content:center;}
+  .kicker{
+    font-family:var(--accent); font-style:italic;
+    font-size:clamp(1.3rem,3vw,2.2rem); color:var(--coral);
+    margin-bottom:1.2rem;
+  }
+  .prompt-hero{
+    margin-top:2.4rem;
+    background:var(--ink); color:#F6F1E7;
+    border-radius:16px; padding:clamp(1.1rem,2.2vw,1.6rem) clamp(1.3rem,2.6vw,2rem);
+    font-family:var(--body); font-weight:500;
+    font-size:clamp(1.05rem,2.3vw,1.7rem); line-height:1.35;
+    max-width:26ch; box-shadow:0 18px 40px -18px rgba(30,42,50,.55);
+  }
+  .prompt-hero .tag{
+    display:block; font-size:.62em; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--marigold); margin-bottom:.65rem; font-weight:600;
+  }
+  #typed{white-space:pre-wrap;}
+  .cursor{display:inline-block; width:.6ch; background:var(--marigold); color:transparent; animation:blink 1s steps(1) infinite; border-radius:1px;}
+  @keyframes blink{50%{opacity:0;}}
+  .byline{margin-top:2.4rem; font-size:clamp(1rem,1.8vw,1.25rem); color:var(--ink-soft);}
+  .byline b{color:var(--ink); font-weight:600;}
+  .byline a{color:var(--teal); text-decoration:none; font-weight:600;}
+
+  /* tiles */
+  .tiles{display:flex; flex-wrap:wrap; gap:.8rem; margin-top:2rem; max-width:42ch;}
+  .tile{
+    background:var(--card); border:2px solid var(--line);
+    border-radius:14px; padding:.85rem 1.1rem;
+    font-size:clamp(1rem,1.9vw,1.35rem); font-weight:500;
+    display:flex; align-items:center; gap:.6rem;
+  }
+  .tile .em{font-size:1.5em; line-height:1;}
+
+  /* the loop */
+  .loop{display:flex; align-items:stretch; gap:clamp(.8rem,2vw,1.6rem); flex-wrap:wrap; margin-top:2.4rem;}
+  .step{
+    flex:1 1 200px; background:var(--card); border:2px solid var(--line);
+    border-radius:18px; padding:clamp(1.2rem,2.4vw,1.9rem); position:relative;
+    min-width:180px;
+  }
+  .step .n{
+    font-family:var(--display); font-weight:800;
+    font-size:clamp(1.6rem,3.4vw,2.6rem); color:var(--marigold); line-height:1;
+  }
+  .step h3{font-family:var(--display); font-weight:600; font-size:clamp(1.25rem,2.4vw,1.8rem); margin:.5rem 0 .35rem;}
+  .step p{color:var(--ink-soft); font-size:clamp(.98rem,1.7vw,1.2rem); line-height:1.35;}
+  .loop .arrow{align-self:center; color:var(--teal); font-size:clamp(1.6rem,3vw,2.4rem); font-weight:800;}
+
+  /* recipe card */
+  .recipe{
+    margin-top:2rem; background:var(--card); border:2px solid var(--line);
+    border-radius:20px; padding:clamp(1.4rem,3vw,2.4rem); max-width:30ch;
+    box-shadow:0 16px 36px -22px rgba(30,42,50,.4);
+  }
+  .recipe .r{display:flex; gap:.9rem; align-items:baseline; padding:.55rem 0; border-bottom:1px dashed var(--line); font-size:clamp(1.05rem,2.1vw,1.55rem);}
+  .recipe .r:last-child{border-bottom:none;}
+  .recipe .r b{font-family:var(--display); font-weight:600; color:var(--teal); min-width:1.4ch;}
+  .recipe .r span{font-weight:400;}
+  .recipe .r i{font-style:normal; color:var(--ink-soft);}
+
+  /* magic card (exercise) */
+  .magic{
+    margin-top:1.8rem; background:#FFFDF8; border:3px solid var(--coral);
+    border-radius:22px; padding:clamp(1.6rem,3.4vw,2.8rem); max-width:24ch;
+    box-shadow:0 22px 46px -20px rgba(232,97,60,.4); position:relative;
+  }
+  .magic .label{position:absolute; top:-.9em; left:1.4rem; background:var(--coral); color:#fff; font-weight:600; font-size:clamp(.8rem,1.4vw,1rem); letter-spacing:.1em; text-transform:uppercase; padding:.2rem .8rem; border-radius:999px;}
+  .magic p{font-family:var(--display); font-weight:600; font-size:clamp(1.3rem,3vw,2.3rem); line-height:1.5;}
+  .blank{display:inline-block; min-width:5ch; border-bottom:3px solid var(--marigold); text-align:center; color:var(--marigold);}
+  .magic .go{margin-top:1.2rem; font-family:var(--body); font-weight:500; font-size:clamp(1rem,1.8vw,1.3rem); color:var(--ink-soft);}
+
+  /* menu columns */
+  .menu{display:flex; gap:clamp(.8rem,2vw,1.6rem); flex-wrap:wrap; margin-top:1.8rem;}
+  .col{flex:1 1 240px; background:var(--card); border:2px solid var(--line); border-radius:18px; padding:clamp(1.1rem,2.2vw,1.6rem); min-width:200px;}
+  .col h3{font-family:var(--display); font-weight:800; font-size:clamp(1.2rem,2.2vw,1.7rem); margin-bottom:.15rem;}
+  .col .tagline{font-size:.85rem; letter-spacing:.06em; text-transform:uppercase; font-weight:600; margin-bottom:.8rem;}
+  .col.easy .tagline{color:var(--teal);} .col.med .tagline{color:var(--marigold);} .col.hard .tagline{color:var(--coral);}
+  .col ul{list-style:none;}
+  .col li{padding:.4rem 0 .4rem 1.3rem; position:relative; font-size:clamp(.98rem,1.7vw,1.2rem); line-height:1.3; color:var(--ink);}
+  .col li::before{content:""; position:absolute; left:0; top:.85em; width:8px; height:8px; border-radius:50%;}
+  .col.easy li::before{background:var(--teal);} .col.med li::before{background:var(--marigold);} .col.hard li::before{background:var(--coral);}
+
+  /* rules row */
+  .rules{display:flex; gap:clamp(.8rem,2vw,1.6rem); flex-wrap:wrap; margin-top:2.2rem;}
+  .rule{flex:1 1 220px; min-width:200px;}
+  .rule .big{font-family:var(--display); font-weight:800; font-size:clamp(1.5rem,3vw,2.3rem); color:var(--teal);}
+  .rule p{margin-top:.4rem; font-size:clamp(1rem,1.8vw,1.3rem); color:var(--ink-soft); line-height:1.35;}
+
+  /* closing */
+  #s-close h1{max-width:14ch;}
+  .home-list{margin-top:1.8rem; max-width:34ch;}
+  .home-list li{list-style:none; padding:.5rem 0 .5rem 2rem; position:relative; font-size:clamp(1.05rem,2vw,1.45rem); line-height:1.35;}
+  .home-list li::before{content:"→"; position:absolute; left:0; color:var(--coral); font-weight:800;}
+
+  /* footer + nav */
+  footer{
+    position:fixed; bottom:0; left:0; right:0;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:.8rem clamp(1.5rem,4vw,3rem); z-index:40;
+    pointer-events:none;
+  }
+  .wordmark{font-family:var(--display); font-weight:800; font-size:clamp(.9rem,1.5vw,1.1rem); color:var(--ink); opacity:.55;}
+  .wordmark span{color:var(--coral);}
+  .nav{display:flex; align-items:center; gap:.5rem; pointer-events:auto;}
+  .nav button{
+    font-family:var(--body); font-weight:600; font-size:1.4rem;
+    width:clamp(44px,6vw,54px); height:clamp(44px,6vw,54px);
+    border-radius:50%; border:2px solid var(--line); background:var(--card);
+    color:var(--ink); cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition:transform .12s ease, background .2s ease;
+  }
+  .nav button:hover{background:var(--mist);}
+  .nav button:active{transform:scale(.92);}
+  .nav button:focus-visible{outline:3px solid var(--teal); outline-offset:3px;}
+  .nav .count{font-variant-numeric:tabular-nums; font-weight:600; color:var(--ink-soft); min-width:4ch; text-align:center; font-size:clamp(.9rem,1.6vw,1.1rem);}
+
+  .hint{position:fixed; bottom:clamp(5rem,10vh,7rem); left:50%; transform:translateX(-50%); font-size:.95rem; color:var(--ink-soft); opacity:.7; pointer-events:none;}
+
+  @media (max-width:640px){
+    .sub,h2{max-width:100%;}
+    .loop .arrow{display:none;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .slide.active{animation:none;}
+    .cursor{animation:none; opacity:1;}
+    #bar{transition:none;}
+    .nav button{transition:none;}
+  }
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<div class="deck">
+
+  <!-- 1 TITLE -->
+  <section class="slide active" id="s-title">
+    <div class="kicker">from curious to creator</div>
+    <h1>Building<br>with AI</h1>
+    <div class="prompt-hero">
+      <span class="tag">you type this</span>
+      <span id="typed"></span><span class="cursor">.</span>
+    </div>
+    <div class="byline">A hands-on hour · <b>Yusuf Pisan</b> · <a href="mailto:yusuf.pisan@gmail.com">yusuf.pisan@gmail.com</a></div>
+  </section>
+
+  <!-- 2 BIG IDEA -->
+  <section class="slide" id="s-idea">
+    <div class="eyebrow">the one big idea</div>
+    <h2>You can now build software just by describing it.</h2>
+    <p class="sub">No coding. You explain what you want in <strong>plain English</strong>, and the computer writes it for you.</p>
+  </section>
+
+  <!-- 3 MEET CLAUDE -->
+  <section class="slide" id="s-meet">
+    <div class="eyebrow">the tool</div>
+    <h2>This is Claude.</h2>
+    <p class="sub">An AI that has read an enormous amount of writing. It's very good at turning your words into working things: explanations, drafts, and yes, <strong>little web apps</strong>.</p>
+  </section>
+
+  <!-- 4 HOW IT WORKS -->
+  <section class="slide" id="s-how">
+    <div class="eyebrow">how it works, in one breath</div>
+    <h2>Like a very well-read assistant.</h2>
+    <p class="sub">It predicts what should come next, so it can write it for you. Ask clearly and you get more of what you want. One catch: <strong>it sounds sure even when it's wrong</strong>, so double-check anything that matters.</p>
+  </section>
+
+  <!-- 5 WHAT'S A WEB APP -->
+  <section class="slide" id="s-app">
+    <div class="eyebrow">quick definition</div>
+    <h2>A "web app" is just a little program in your browser.</h2>
+    <div class="tiles">
+      <div class="tile"><span class="em">🧮</span> a tip splitter</div>
+      <div class="tile"><span class="em">🍲</span> a recipe box</div>
+      <div class="tile"><span class="em">⏳</span> a countdown</div>
+      <div class="tile"><span class="em">❓</span> a family quiz</div>
+    </div>
+    <p class="sub">If it opens in a browser, it's a web app. That's all we're making today.</p>
+  </section>
+
+  <!-- 6 THE LOOP -->
+  <section class="slide" id="s-loop">
+    <div class="eyebrow">how today works</div>
+    <h2>The loop.</h2>
+    <div class="loop">
+      <div class="step"><div class="n">1</div><h3>Describe it</h3><p>Tell Claude what you want, in your own words.</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">2</div><h3>Claude builds it</h3><p>It writes the app and shows it to you.</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">3</div><h3>You tweak it</h3><p>"Change this, add that." Repeat until happy.</p></div>
+    </div>
+  </section>
+
+  <!-- 7 RECIPE -->
+  <section class="slide" id="s-recipe">
+    <div class="eyebrow">the secret</div>
+    <h2>A good ask has five ingredients.</h2>
+    <div class="recipe">
+      <div class="r"><b>1</b><span><i>Who</i> it's for</span></div>
+      <div class="r"><b>2</b><span><i>What</i> it should do</span></div>
+      <div class="r"><b>3</b><span>A few <i>details</i></span></div>
+      <div class="r"><b>4</b><span>How it should <i>look</i></span></div>
+      <div class="r"><b>5</b><span>Then just say <i>"build it"</i></span></div>
+    </div>
+  </section>
+
+  <!-- 8 DEMO -->
+  <section class="slide" id="s-demo">
+    <div class="eyebrow">watch once</div>
+    <h2>I'll build one live.</h2>
+    <p class="sub">Watch the loop in action: one prompt in, a working app out, then a quick tweak. <strong>You're up next.</strong></p>
+  </section>
+
+  <!-- 9 EXERCISE -->
+  <section class="slide" id="s-exercise">
+    <div class="eyebrow">now you try</div>
+    <div class="magic">
+      <span class="label">your magic card</span>
+      <p>Build me a <span class="blank">&nbsp;</span> that helps me <span class="blank">&nbsp;</span>. Make it <span class="blank">&nbsp;</span> and easy to read.</p>
+      <div class="go">Fill the blanks → paste into Claude → watch it appear.</div>
+    </div>
+  </section>
+
+  <!-- 10 MAKE IT YOURS -->
+  <section class="slide" id="s-tweak">
+    <div class="eyebrow">make it yours</div>
+    <h2>Now change one thing.</h2>
+    <div class="tiles">
+      <div class="tile">"Make the background sunset colors"</div>
+      <div class="tile">"Add a button that says Surprise me"</div>
+      <div class="tile">"Make the text bigger"</div>
+    </div>
+    <p class="sub">Watch how fast it updates. You really can't break it.</p>
+  </section>
+
+  <!-- 11 SHOW AND TELL -->
+  <section class="slide" id="s-show">
+    <div class="eyebrow">share</div>
+    <h2>Turn your screen to a neighbor.</h2>
+    <p class="sub">What did you make? Steal each other's ideas shamelessly.</p>
+  </section>
+
+  <!-- 12 MENU -->
+  <section class="slide" id="s-menu">
+    <div class="eyebrow">pick your adventure</div>
+    <h2>Ideas for what to build.</h2>
+    <div class="menu">
+      <div class="col easy">
+        <h3>Easy</h3><div class="tagline">one screen · instant</div>
+        <ul><li>Bill &amp; tip splitter</li><li>Countdown to a trip</li><li>Random dinner picker</li><li>Family trivia quiz</li></ul>
+      </div>
+      <div class="col med">
+        <h3>Medium</h3><div class="tagline">remembers things</div>
+        <ul><li>Recipe box</li><li>Packing checklist</li><li>Book / movie log</li><li>Garden journal</li></ul>
+      </div>
+      <div class="col hard">
+        <h3>Hard</h3><div class="tagline">shared · saved</div>
+        <ul><li>Book club site</li><li>Family recipe collection</li><li>Party RSVP page</li><li>A little game</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 GOOD HABITS -->
+  <section class="slide" id="s-habits">
+    <div class="eyebrow">three good habits</div>
+    <h2>Small things that help.</h2>
+    <div class="rules">
+      <div class="rule"><div class="big">Save it</div><p>Copy your work somewhere. Nothing is automatic.</p></div>
+      <div class="rule"><div class="big">Check facts</div><p>If it matters, verify it. Confident isn't correct.</p></div>
+      <div class="rule"><div class="big">Start over</div><p>It's free to try again. Redo beats wrestling.</p></div>
+    </div>
+  </section>
+
+  <!-- 14 KEEP PLAYING -->
+  <section class="slide" id="s-home">
+    <div class="eyebrow">keep playing at home</div>
+    <h2>This week, try…</h2>
+    <ul class="home-list">
+      <li>Open <b>claude.ai</b> or the Claude app</li>
+      <li>Build one thing from the menu</li>
+      <li>Ask it to explain something you're curious about</li>
+      <li>Your handout has starter prompts to copy</li>
+    </ul>
+  </section>
+
+  <!-- 15 CLOSE -->
+  <section class="slide" id="s-close">
+    <div class="kicker">that's a wrap</div>
+    <h1>You just built software.</h1>
+    <p class="sub">Welcome to the fun part. Questions?</p>
+    <div class="byline"><b>Yusuf Pisan</b> · <a href="mailto:yusuf.pisan@gmail.com">yusuf.pisan@gmail.com</a></div>
+  </section>
+
+</div>
+
+<div class="hint" id="hint">Use ← → arrow keys, or the buttons below</div>
+
+<footer>
+  <div class="wordmark">Building with <span>AI</span></div>
+  <div class="nav">
+    <button id="prev" aria-label="Previous slide">‹</button>
+    <span class="count" id="count">1 / 15</span>
+    <button id="next" aria-label="Next slide">›</button>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var i = 0, total = slides.length;
+  var bar = document.getElementById('bar');
+  var count = document.getElementById('count');
+  var hint = document.getElementById('hint');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function show(n){
+    i = Math.max(0, Math.min(total-1, n));
+    slides.forEach(function(s,idx){ s.classList.toggle('active', idx===i); });
+    bar.style.width = ((i)/(total-1)*100) + '%';
+    count.textContent = (i+1) + ' / ' + total;
+    if(i>0 && hint){ hint.style.display='none'; }
+  }
+  function next(){ show(i+1); }
+  function prev(){ show(i-1); }
+
+  document.getElementById('next').addEventListener('click', next);
+  document.getElementById('prev').addEventListener('click', prev);
+
+  document.addEventListener('keydown', function(e){
+    if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); next(); }
+    else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); prev(); }
+    else if(e.key==='Home'){ show(0); }
+    else if(e.key==='End'){ show(total-1); }
+  });
+
+  // basic swipe
+  var x0=null;
+  document.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    if(x0===null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if(Math.abs(dx)>50){ dx<0 ? next() : prev(); }
+    x0=null;
+  }, {passive:true});
+
+  show(0);
+
+  // hero typewriter
+  var phrases = [
+    "Build me a recipe box that saves Grandma's recipes",
+    "Build me a countdown to our trip to Italy",
+    "Build me a quiz: how well do you know our family?"
+  ];
+  var typed = document.getElementById('typed');
+  if(reduce){
+    typed.textContent = phrases[0];
+  } else {
+    var p=0, c=0, deleting=false;
+    function tick(){
+      var full = phrases[p];
+      if(!deleting){
+        c++;
+        typed.textContent = full.slice(0,c);
+        if(c===full.length){ deleting=true; return setTimeout(tick, 1900); }
+        setTimeout(tick, 45);
+      } else {
+        c--;
+        typed.textContent = full.slice(0,c);
+        if(c===0){ deleting=false; p=(p+1)%phrases.length; return setTimeout(tick, 400); }
+        setTimeout(tick, 22);
+      }
+    }
+    setTimeout(tick, 700);
+  }
+})();
+</script>
+</body>
+</html>

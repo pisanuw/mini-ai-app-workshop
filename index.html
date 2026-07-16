@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building with AI — mini workshop</title>
+<meta name="description" content="A one-hour hands-on workshop: build your first web app just by describing it to Claude.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Fraunces:ital,opsz,wght@1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FCF9F3; --ink:#1E2A32; --ink-soft:#4A5A63;
+    --marigold:#F2A93B; --teal:#0F7C79; --coral:#E8613C;
+    --line:#DAD0BF; --card:#FFFFFF;
+    --display:"Bricolage Grotesque", system-ui, sans-serif;
+    --body:"Inter", system-ui, sans-serif;
+    --accent:"Fraunces", Georgia, serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:var(--body); background:var(--paper); color:var(--ink); line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:940px; margin:0 auto; padding:clamp(2.5rem,6vw,5rem) 1.5rem 4rem;}
+
+  header{margin-bottom:2.6rem;}
+  .kicker{font-family:var(--accent); font-style:italic; font-size:clamp(1.15rem,2.6vw,1.7rem); color:var(--coral); margin-bottom:.5rem;}
+  h1{font-family:var(--display); font-weight:800; font-size:clamp(2.8rem,8vw,5rem); line-height:.98; letter-spacing:-.02em;}
+  .tagline{font-size:clamp(1.15rem,2.3vw,1.5rem); color:var(--ink-soft); margin-top:1rem; max-width:34ch;}
+  .presenter{margin-top:1.3rem; font-size:1.05rem; color:var(--ink-soft);}
+  .presenter b{color:var(--ink); font-weight:600;}
+  .presenter a{color:var(--teal); font-weight:600; text-decoration:none;}
+
+  a.card{display:block; text-decoration:none; color:inherit; border-radius:20px; transition:transform .15s ease, box-shadow .2s ease;}
+  a.card:focus-visible{outline:3px solid var(--teal); outline-offset:4px;}
+
+  /* hero presentation card */
+  .hero{background:var(--ink); color:#F6F1E7; padding:clamp(1.8rem,4vw,2.8rem); box-shadow:0 24px 50px -24px rgba(30,42,50,.6); margin-bottom:2.4rem;}
+  .hero:hover{transform:translateY(-3px); box-shadow:0 30px 60px -24px rgba(30,42,50,.7);}
+  .hero .lab{font-weight:600; letter-spacing:.14em; text-transform:uppercase; font-size:.8rem; color:var(--marigold); display:flex; align-items:center; gap:.6rem;}
+  .hero .lab::before{content:""; width:26px; height:3px; background:var(--marigold); border-radius:2px;}
+  .hero h2{font-family:var(--display); font-weight:800; font-size:clamp(1.8rem,4.5vw,3rem); line-height:1.02; margin:.9rem 0 .5rem; letter-spacing:-.01em;}
+  .hero p{color:#C9C2B4; font-size:clamp(1.02rem,1.9vw,1.25rem); max-width:40ch;}
+  .hero .go{display:inline-block; margin-top:1.3rem; font-family:var(--display); font-weight:600; font-size:1.15rem; color:#F6F1E7;}
+  .hero .go::after{content:" →";}
+
+  h3.section{font-family:var(--display); font-weight:800; font-size:1.3rem; margin:0 0 1rem; padding-left:.8rem; border-left:5px solid var(--marigold);}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.1rem; margin-bottom:2.4rem;}
+  .res{background:var(--card); border:2px solid var(--line); border-radius:18px; padding:1.4rem 1.5rem;}
+  .res .tag{font-weight:600; letter-spacing:.06em; text-transform:uppercase; font-size:.72rem; color:var(--teal); margin-bottom:.5rem;}
+  .res.notes .tag{color:var(--coral);}
+  .res h4{font-family:var(--display); font-weight:600; font-size:1.35rem; margin-bottom:.35rem;}
+  .res p{color:var(--ink-soft); font-size:.98rem; margin-bottom:1rem;}
+  .res .links{display:flex; gap:.6rem; flex-wrap:wrap;}
+  .res .links a{font-weight:600; font-size:.95rem; text-decoration:none; color:var(--ink); background:var(--paper); border:1.5px solid var(--line); border-radius:999px; padding:.4rem .95rem; transition:background .15s ease, border-color .15s ease;}
+  .res .links a:hover{background:var(--mist,#EBE4D6); border-color:var(--teal);}
+  .res .links a:focus-visible{outline:3px solid var(--teal); outline-offset:2px;}
+
+  /* share card */
+  .share{background:#FFFDF8; border:3px solid var(--coral); padding:clamp(1.6rem,3.5vw,2.4rem); box-shadow:0 22px 46px -24px rgba(232,97,60,.4);}
+  .share:hover{transform:translateY(-3px);}
+  .share .lab{font-weight:600; letter-spacing:.12em; text-transform:uppercase; font-size:.78rem; color:var(--coral);}
+  .share h2{font-family:var(--display); font-weight:800; font-size:clamp(1.6rem,4vw,2.4rem); margin:.5rem 0 .4rem; letter-spacing:-.01em;}
+  .share p{color:var(--ink-soft); font-size:1.05rem;}
+  .share .url{display:inline-block; margin-top:1rem; font-family:var(--display); font-weight:600; color:var(--coral); font-size:1.15rem;}
+  .share .url::after{content:" →";}
+
+  footer{margin-top:3rem; padding-top:1.4rem; border-top:2px solid var(--line); color:var(--ink-soft); font-size:.95rem;}
+  footer b{color:var(--ink); font-weight:600;}
+  footer a{color:var(--teal); font-weight:600; text-decoration:none;}
+
+  @media (prefers-reduced-motion:reduce){ a.card{transition:none;} a.card:hover{transform:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">a hands-on mini-workshop</div>
+    <h1>Building with AI</h1>
+    <p class="tagline">Make your first web app in an hour, just by describing it to Claude.</p>
+    <p class="presenter"><b>Yusuf Pisan</b> · <a href="mailto:yusuf.pisan@gmail.com">yusuf.pisan@gmail.com</a></p>
+  </header>
+
+  <a class="card hero" href="ai-workshop-deck.html">
+    <span class="lab">The presentation</span>
+    <h2>Open the slides</h2>
+    <p>The full walkthrough: what AI is, how the build loop works, and the hands-on exercise.</p>
+    <span class="go">Start presenting</span>
+  </a>
+
+  <h3 class="section">Handouts &amp; notes</h3>
+  <div class="grid">
+    <div class="res">
+      <div class="tag">For participants</div>
+      <h4>Participant handout</h4>
+      <p>Everything from the session: the prompt recipe, the app menu, ready-to-paste starter prompts, and a plain-English glossary.</p>
+      <div class="links">
+        <a href="participant-handout.html">View</a>
+        <a href="participant-handout.pdf">PDF</a>
+      </div>
+    </div>
+    <div class="res notes">
+      <div class="tag">For the facilitator</div>
+      <h4>Presenter notes</h4>
+      <p>Minute-by-minute run sheet, the live-demo script, rescue prompts, and troubleshooting for running the hour.</p>
+      <div class="links">
+        <a href="facilitator-guide.html">Open</a>
+      </div>
+    </div>
+  </div>
+
+  <a class="card share" href="https://shareapps.netlify.app/" target="_blank" rel="noopener">
+    <span class="lab">Built something?</span>
+    <h2>Share your app with the group</h2>
+    <p>Post what you made so everyone can try it.</p>
+    <span class="url">shareapps.netlify.app</span>
+  </a>
+
+  <footer>
+    Building with AI · <b>Yusuf Pisan</b> · <a href="mailto:yusuf.pisan@gmail.com">yusuf.pisan@gmail.com</a>
+  </footer>
+
+</div>
+</body>
+</html>

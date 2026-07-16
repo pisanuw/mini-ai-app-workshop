@@ -1,0 +1,264 @@
+================================================================
+YAPAY ZEKÂ İLE UYGULAMA YAPMAK
+Evinize Götürebileceğiniz Rehber
+================================================================
+
+Bugün öğrendiğiniz her şey burada, tek bir yerde. Bu rehberi
+bilgisayarınızın yanında bulundurun. Hiçbir şeyi ezberlemenize
+gerek yok; sadece buraya dönüp yazmaya başlayın.
+
+
+----------------------------------------------------------------
+BİR DAKİKADA BUGÜN
+----------------------------------------------------------------
+
+Ne istediğinizi sade bir Türkçeyle anlattınız, Claude de onu
+sizin için yaptı. İşin tüm sırrı bu ve her seferinde aynı
+şekilde işler:
+
+  1) Anlatın        — Ne istediğinizi söyleyin.
+  2) Claude yapsın  — Uygulamayı o yazar.
+  3) Siz düzenleyin — Değiştirin, ekleyin, tekrarlayın.
+
+
+----------------------------------------------------------------
+SADE BİR DİLLE YAPAY ZEKÂ
+----------------------------------------------------------------
+
+• Nedir: Çok büyük miktarda yazı okumuş bir asistandır; sırada
+  ne gelmesi gerektiğini tahmin eder ve böylece sizin için
+  metinler ve çözümler üretebilir.
+
+• Nelerde iyidir: Açıklama yapma, taslak yazma, özetleme,
+  çeviri ve basit web uygulamaları yapma.
+
+• Dikkat edilmesi gereken: Kendinden son derece emin görünüp
+  yine de yanılabilir. (Buna İngilizcede "halüsinasyon" deniyor.)
+  Önemli olan her şeyi mutlaka kontrol edin.
+
+• Her zaman güncel değildir: Sizin için araştırmadıkça çok yeni
+  haberleri bilmeyebilir.
+
+• Yönetim sizde: Ne isterseniz onu yapar. Ne kadar net sorarsanız
+  o kadar iyi sonuç alırsınız.
+
+• Bozamazsınız: Rahatça deneyin. İstediğiniz an yeni bir sohbet
+  başlatın.
+
+
+----------------------------------------------------------------
+İYİ BİR İSTEĞİN TARİFİ
+----------------------------------------------------------------
+
+İyi bir istek beş malzemeden oluşur. Birini atlarsanız sonradan
+ekleyin.
+
+  1. Kimin için      — "kitap kulübüm için"
+  2. Ne yapmalı      — "okuduğumuz kitapları ve puanlarımızı
+                        takip etsin"
+  3. Birkaç ayrıntı  — "5 yıldız, not için bir alan"
+  4. Nasıl görünmeli — "sıcak renkler, büyük ve okunaklı yazı"
+  5. Sonra 'yap' de  — "şimdi bunu bir web uygulaması olarak yap"
+
+Hepsi bir arada:
+"Kitap kulübüm için, okuduğumuz kitapları 5 yıldızlı bir puan ve
+not alanıyla takip eden bir web uygulaması yap. Sıcak renkler ve
+büyük, okunaklı yazı olsun. Şimdi bunu bir web uygulaması olarak
+yap."
+
+
+----------------------------------------------------------------
+SİHİRLİ KARTINIZ
+----------------------------------------------------------------
+
+Nereden başlayacağınızı bilemiyor musunuz? Üç boşluğu doldurun ve
+Claude'a yapıştırın.
+
+    +--------------------------------------------------+
+    |  Bana bir ____________ yap. ____________          |
+    |  yardımcı olsun. ____________ olsun ve            |
+    |  okunması kolay olsun.                            |
+    +--------------------------------------------------+
+
+Fikir vermesi için üç örnek:
+
+• Bana bir geri sayım uygulaması yap. Gemi turumuza kaç gün
+  kaldığını görmeme yardımcı olsun. Neşeli, deniz temalı olsun ve
+  okunması kolay olsun.
+
+• Bana bir tarif kutusu yap. En sevdiğimiz yemekleri kaydetmeme ve
+  bulmama yardımcı olsun. Sıcak ve samimi olsun ve okunması kolay
+  olsun.
+
+• Bana bir sınav (quiz) uygulaması yap. Torunlarımı aile tarihimiz
+  konusunda sınamama yardımcı olsun. Renkli ve eğlenceli olsun ve
+  okunması kolay olsun.
+
+
+----------------------------------------------------------------
+KENDİNİZE GÖRE DÜZENLEYİN: HAZIR CÜMLELER
+----------------------------------------------------------------
+
+Claude bir şey yaptıktan sonra, değiştirmek için bunlardan birini
+yazın. Aynen kopyalayabilirsiniz.
+
+• "Yazıyı büyüt."
+• "Daha sıcak renkler kullan" (ya da gün batımı renkleri, ya da
+  "en sevdiğim renk olan turkuaz").
+• "Üzerinde ______ yazan bir düğme ekle."
+• "En üste bir resim ekle."
+• "Telefonumda da düzgün çalışsın."
+• "Not yazabileceğim bir alan ekle."
+• "En yenisi en üstte olsun."
+• "Bir sıfırlama düğmesi ekle."
+• "Bir şey ters görünüyor. Düzeltebilir misin?"
+• "Baştan başla, bu sefer daha basit olsun."
+
+
+----------------------------------------------------------------
+UYGULAMA MENÜSÜ
+----------------------------------------------------------------
+
+Kopyalayıp yapıştırmaya hazır istekler. Bugün KOLAY olanlardan
+biriyle başlayın; gerisini yağmurlu bir güne saklayın.
+
+
+KOLAY  (tek ekran · hemen çalışır)
+
+• Hesap ve bahşiş bölüştürücü
+  "Bir restoran hesabını ve bahşişi birkaç kişi arasında
+  bölüştüren bir web uygulaması yap. Toplam tutarı, bahşiş
+  yüzdesini ve kişi sayısını yazabileyim. Herkesin ne kadar
+  ödeyeceğini büyük ve net rakamlarla göster."
+
+• Geri sayım
+  "Seçtiğim bir tarihe kalan günleri sayan bir web uygulaması yap.
+  Etkinlik adını ve tarihi yazabileyim; kalan günleri büyük ve
+  okunaklı yazıyla göster. Neşeli renkler olsun."
+
+• Yemek seçici
+  "En sevdiğimiz yemeklerin listesini yapıştırdığım ve bir
+  düğmenin rastgele birini seçtiği bir web uygulaması yap.
+  Seçileni büyük yazıyla ve 'tekrar seç' düğmesiyle göster."
+
+• Aile bilgi yarışması
+  "Kısa, çoktan seçmeli bir sınav (quiz) uygulaması yap. Sana 5
+  soru ve cevaplarını vereceğim. Puan tutsun ve sonunda güler
+  yüzlü bir sonuç göstersin."
+
+
+ORTA  (bilgileri tarayıcınızda hatırlar)
+
+• Tarif kutusu
+  "Tariflerimi kaydeden bir web uygulaması yap. Başlık, malzemeler
+  ve adımlar ekleyebileyim, sonra bir listede görüp arayabileyim.
+  Tariflerimi tarayıcıda hatırlasın. Sıcak, samimi bir görünüm
+  olsun."
+
+• Bavul kontrol listesi
+  "Tekrar tekrar kullanılabilen bir bavul kontrol listesi
+  uygulaması yap. Öğe ekleyebileyim, işaretleyebileyim ve bir
+  sonraki yolculuk için tüm işaretleri temizleyebileyim. Listemi
+  hatırlasın. Büyük onay kutuları olsun."
+
+• Kitap veya film günlüğü
+  "Kitapları (ya da filmleri) başlık, 5 üzerinden yıldız puanı ve
+  bir notla kaydeden bir web uygulaması yap. Puana göre
+  sıralayabileceğim bir listede göster. Tarayıcıda hatırlasın."
+
+• Bahçe günlüğü
+  "Bir bahçe günlüğü uygulaması yap. Ne ektiğimi, tarihini ve en
+  son ne zaman suladığımı kaydedebileyim. Basit bir liste göster.
+  Yeşil, doğal renkler olsun."
+
+
+ZOR  (başka kişilerle kaydeder veya paylaşır)
+
+• Kitap kulübü sitesi
+  "Üyeleri listeleyen, o anki kitabı gösteren ve herkesin
+  kaydedilip paylaşılan tartışma notları eklemesine izin veren bir
+  kitap kulübü web uygulaması yap. Notları başkalarının da
+  görmesini istiyorum; gerekiyorsa bir veritabanı kullan ve
+  kurulumu adım adım bana anlat."
+
+• Ailece paylaşılan tarif koleksiyonu
+  "Tüm ailemin, herkesin görebileceği ortak bir koleksiyona tarif
+  ekleyebildiği bir web uygulaması yap. Sadece benim bilgisayarımda
+  değil, paylaşımlı olacak şekilde kaydet ve gereken kurulumda bana
+  yol göster."
+
+• Parti katılım (RSVP) sayfası
+  "Bir parti için katılım (RSVP) uygulaması yap. Davetliler adını
+  yazsın, geleceğini ya da gelmeyeceğini belirtsin ve hangi yemeği
+  getireceğini söylesin. Yanıtları kaydet ki tüm listeyi
+  görebileyim; paylaşmada da bana yol göster."
+
+• Eşleştirme oyunu
+  "Puan tutan ve yeniden başlatma düğmesi olan bir hafıza
+  eşleştirme kart oyunu uygulaması yap. Renkli ve eğlenceli olsun."
+
+Not: ZOR olanların bilgileri kaydetmesi veya paylaşması gerekir.
+Claude bunu gerektiğinde ücretsiz bir "veritabanı" kurup size
+adımları verebilir. Acele etmeyin; sizi baştan sona
+yönlendirecektir.
+
+
+----------------------------------------------------------------
+ÜÇ İYİ ALIŞKANLIK
+----------------------------------------------------------------
+
+• Kaydedin: Çalışmanızı bir yere kopyalayın. Hiçbir şey
+  kendiliğinden kaydedilmez.
+
+• Bilgileri doğrulayın: Önemliyse teyit edin. Emin görünmek, doğru
+  olmakla aynı şey değildir.
+
+• Baştan başlayın: Yeniden denemek ücretsizdir. Çoğu zaman temiz
+  bir başlangıç, uzun bir uğraştan iyidir.
+
+
+----------------------------------------------------------------
+EVDE KEŞFETMEYE DEVAM EDİN
+----------------------------------------------------------------
+
+Claude'a nasıl ulaşırsınız?
+Herhangi bir web tarayıcısında claude.ai adresini açın ya da
+telefonunuza veya bilgisayarınıza Claude uygulamasını kurun.
+Ücretsiz bir hesap epeyce şey denemenize yeter.
+
+Bu hafta deneyebileceğiniz beş şey:
+• Menüden bir KOLAY uygulama yapın.
+• Hep merak ettiğiniz bir şeyi açıklamasını isteyin.
+• Sizin için zor bir e-posta veya not taslağı yazdırın.
+• Buzdolabınızdakilerle bir yemek fikri isteyin.
+• Bir mesajı başka bir dile ya da başka bir dilden çevirtin.
+
+Daha fazlasını mı öğrenmek istiyorsunuz?
+Bir sohbeti açık tutun ve "Nasıl yapabilirim…?" diye sorun. Size
+adım adım, seve seve öğretir.
+
+
+----------------------------------------------------------------
+KÜÇÜK SÖZLÜK
+----------------------------------------------------------------
+
+Yapay Zekâ (AI)   : Dili (ve görselleri) anlayıp üretebilen
+                    yazılım.
+Claude            : Bugün kullandığımız yapay zekâ asistanı.
+İstem (Prompt)    : Bir şey istemek için yazdığınız mesaj.
+Halüsinasyon      : Yapay zekânın yanlış bir şeyi doğruymuş gibi
+                    söylemesi.
+Web uygulaması    : Web tarayıcısında çalışan küçük bir program.
+Tarayıcı          : Web sitelerini ziyaret etmek için kullandığınız
+                    program (Chrome, Safari, Edge).
+Barındırma /      : Uygulamanızı, başkalarının bir bağlantıyla
+Yayınlama           açabilmesi için internete koymak.
+(Host / Deploy)
+Veritabanı        : Bir uygulamanın bilgileri kaydedip
+                    paylaşabilmek için sakladığı yer.
+
+
+================================================================
+Yapay Zekâ ile Uygulama Yapmak · Evinize götürebileceğiniz rehber.
+Claude ile hazırlanmıştır.
+================================================================
