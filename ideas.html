@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100 app ideas — Building with AI</title>
+<meta name="description" content="A hundred small web apps to build with Claude, grouped by theme and tagged easy, medium, or hard.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Fraunces:ital,opsz,wght@1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FCF9F3; --ink:#1E2A32; --ink-soft:#4A5A63;
+    --marigold:#F2A93B; --teal:#0F7C79; --coral:#E8613C;
+    --line:#DAD0BF; --card:#FFFFFF; --mist:#EBE4D6;
+    --display:"Bricolage Grotesque", system-ui, sans-serif;
+    --body:"Inter", system-ui, sans-serif;
+    --accent:"Fraunces", Georgia, serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:var(--body); background:var(--paper); color:var(--ink); line-height:1.5; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:900px; margin:0 auto; padding:clamp(2.2rem,5vw,4rem) 1.5rem 4rem;}
+  .back{display:inline-block; margin-bottom:1.4rem; font-weight:600; color:var(--teal); text-decoration:none; font-size:.95rem;}
+  .back::before{content:"\2190  ";}
+  .kicker{font-family:var(--accent); font-style:italic; font-size:clamp(1.1rem,2.4vw,1.5rem); color:var(--coral); margin-bottom:.4rem;}
+  h1{font-family:var(--display); font-weight:800; font-size:clamp(2.6rem,7vw,4.4rem); line-height:.98; letter-spacing:-.02em;}
+  .tagline{font-size:clamp(1.1rem,2.2vw,1.4rem); color:var(--ink-soft); margin-top:.9rem; max-width:44ch;}
+
+  .legend{display:flex; gap:.7rem; flex-wrap:wrap; margin:1.8rem 0 .5rem;}
+  .legend .l{display:flex; align-items:center; gap:.5rem; background:var(--card); border:1.5px solid var(--line); border-radius:999px; padding:.4rem .9rem; font-size:.9rem; color:var(--ink-soft);}
+  .pill{font-size:.7rem; font-weight:600; letter-spacing:.05em; text-transform:uppercase; padding:.16rem .55rem; border-radius:999px; white-space:nowrap;}
+  .pill.easy{background:#E1EFEE; color:var(--teal);}
+  .pill.medium{background:#F6EAD3; color:#A9721A;}
+  .pill.hard{background:#F9E1D9; color:#C6431F;}
+
+  section.theme{background:var(--card); border:2px solid var(--line); border-radius:20px; padding:clamp(1.3rem,3vw,2rem); margin-top:1.5rem; break-inside:avoid;}
+  section.theme h2{font-family:var(--display); font-weight:800; font-size:clamp(1.4rem,3vw,2rem); letter-spacing:-.01em; margin-bottom:.3rem;}
+  section.theme .count{font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; font-weight:600; color:var(--marigold); margin-bottom:1rem; display:block;}
+  .item{display:flex; gap:.8rem; align-items:baseline; padding:.6rem 0; border-bottom:1px dashed var(--line);}
+  .item:last-child{border-bottom:none;}
+  .item .num{color:var(--ink-soft); font-variant-numeric:tabular-nums; min-width:2.4ch; text-align:right; font-weight:600; font-size:.95rem;}
+  .item .body{flex:1;}
+  .item .body b{font-family:var(--display); font-weight:600; color:var(--ink);}
+  .item .body span{color:var(--ink-soft);}
+  .item .pill{align-self:center; flex-shrink:0;}
+
+  footer{margin-top:2.6rem; padding-top:1.3rem; border-top:2px solid var(--line); color:var(--ink-soft); font-size:.95rem;}
+  footer b{color:var(--ink); font-weight:600;}
+  footer a{color:var(--teal); font-weight:600; text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">Back to the workshop</a>
+  <div class="kicker">need a starting point?</div>
+  <h1>100 app ideas</h1>
+  <p class="tagline">Small apps you can build just by describing them to Claude. Pick one, describe it, refine it.</p>
+
+  <div class="legend">
+    <span class="l"><span class="pill easy">easy</span> one screen, nothing saved</span>
+    <span class="l"><span class="pill medium">medium</span> remembers your info</span>
+    <span class="l"><span class="pill hard">hard</span> saves or shares data</span>
+  </div>
+  <section class="theme">
+    <h2>Everyday utilities</h2>
+    <span class="count">10 ideas</span>
+    <div class="item"><span class="num">1</span><span class="body"><b>Bill and tip splitter</b><span>: split a restaurant bill and the tip among friends</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">2</span><span class="body"><b>Unit converter</b><span>: switch between length, weight, temperature, and volume</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">3</span><span class="body"><b>Countdown to any date</b><span>: show the days left until an event you choose</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">4</span><span class="body"><b>Decision spinner</b><span>: type in options and let a wheel pick one</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">5</span><span class="body"><b>QR code maker</b><span>: turn a link or note into a scannable code</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">6</span><span class="body"><b>Multi-timer</b><span>: run several labeled timers at once (laundry, parking, tea)</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">7</span><span class="body"><b>Passphrase generator</b><span>: create strong, memorable passwords and rate them</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">8</span><span class="body"><b>Discount calculator</b><span>: work out a sale price and how much you saved</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">9</span><span class="body"><b>Timezone meeting helper</b><span>: find a good time across a few cities</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">10</span><span class="body"><b>Text tidy tool</b><span>: fix capitals and strip out extra spaces or line breaks</span></span><span class="pill easy">easy</span></div>
+  </section>
+  <section class="theme">
+    <h2>Home, kitchen, and garden</h2>
+    <span class="count">10 ideas</span>
+    <div class="item"><span class="num">11</span><span class="body"><b>Recipe box</b><span>: save, search, and scale your favorite recipes</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">12</span><span class="body"><b>Dinner picker</b><span>: choose a random meal from your own list</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">13</span><span class="body"><b>Pantry tracker</b><span>: log what is in the cupboard and flag what expires soon</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">14</span><span class="body"><b>Aisle-sorted grocery list</b><span>: add items and group them by store section</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">15</span><span class="body"><b>Weekly meal planner</b><span>: slot meals into each day and build a shopping list</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">16</span><span class="body"><b>Plant watering log</b><span>: track when each plant was last watered</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">17</span><span class="body"><b>Planting calendar</b><span>: see what to sow or plant by season</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">18</span><span class="body"><b>Home upkeep reminders</b><span>: nudge for filters, smoke-alarm batteries, and gutters</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">19</span><span class="body"><b>Cost-per-serving calculator</b><span>: price a recipe and divide by portions</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">20</span><span class="body"><b>Use-it-up helper</b><span>: suggest meals from ingredients you already have</span></span><span class="pill medium">medium</span></div>
+  </section>
+  <section class="theme">
+    <h2>Health, fitness, and wellness</h2>
+    <span class="count">10 ideas</span>
+    <div class="item"><span class="num">21</span><span class="body"><b>Water tracker</b><span>: tap to log glasses and see your daily total</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">22</span><span class="body"><b>Walk log</b><span>: record daily steps or minutes with a weekly chart</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">23</span><span class="body"><b>Habit tracker</b><span>: check off a few daily habits and keep a streak</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">24</span><span class="body"><b>Medication schedule</b><span>: list doses and when to take them</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">25</span><span class="body"><b>Mood journal</b><span>: note how you feel each day and watch the trend</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">26</span><span class="body"><b>Routine timer</b><span>: run a stretch or exercise routine with timed steps</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">27</span><span class="body"><b>Sleep log</b><span>: record bedtime, wake time, and how you slept</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">28</span><span class="body"><b>Breathing guide</b><span>: follow an animated box-breathing pattern</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">29</span><span class="body"><b>Gratitude journal</b><span>: jot one good thing a day</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">30</span><span class="body"><b>Heart-rate zone calculator</b><span>: work out target zones from your age</span></span><span class="pill easy">easy</span></div>
+  </section>
+  <section class="theme">
+    <h2>Money and budgeting</h2>
+    <span class="count">10 ideas</span>
+    <div class="item"><span class="num">31</span><span class="body"><b>Budget snapshot</b><span>: compare a month's income against spending</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">32</span><span class="body"><b>Expense tracker</b><span>: log purchases by category and total them</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">33</span><span class="body"><b>Savings goal</b><span>: set a target and watch a progress bar fill</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">34</span><span class="body"><b>Loan calculator</b><span>: estimate monthly payments on a loan or mortgage</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">35</span><span class="body"><b>Savings projector</b><span>: see how a monthly amount grows over years</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">36</span><span class="body"><b>Subscription tracker</b><span>: list what you pay each month and the yearly total</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">37</span><span class="body"><b>Travel currency converter</b><span>: convert amounts for a country you pick</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">38</span><span class="body"><b>Group expense splitter</b><span>: track a trip's costs and who owes whom</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">39</span><span class="body"><b>Allowance tracker</b><span>: log pocket money in and out for a child</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">40</span><span class="body"><b>Cost-per-use calculator</b><span>: decide whether a purchase is worth it</span></span><span class="pill easy">easy</span></div>
+  </section>
+  <section class="theme">
+    <h2>Travel and the outdoors</h2>
+    <span class="count">10 ideas</span>
+    <div class="item"><span class="num">41</span><span class="body"><b>Packing checklist</b><span>: a reusable list that remembers what you tick</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">42</span><span class="body"><b>Trip itinerary</b><span>: plan each day of a trip with times and notes</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">43</span><span class="body"><b>Trip countdown</b><span>: count down to your next trip with a favorite photo</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">44</span><span class="body"><b>Daily travel spend</b><span>: log expenses against a trip budget</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">45</span><span class="body"><b>Jet-lag helper</b><span>: compare home and destination time at a glance</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">46</span><span class="body"><b>Bucket list</b><span>: tick off places and experiences you want</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">47</span><span class="body"><b>Hiking log</b><span>: record trails, distance, and how they went</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">48</span><span class="body"><b>What-to-wear helper</b><span>: paste a forecast and get an outfit suggestion</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">49</span><span class="body"><b>Road-trip planner</b><span>: map out stops and build a playlist</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">50</span><span class="body"><b>Gift and souvenir list</b><span>: track what to buy for each person</span></span><span class="pill medium">medium</span></div>
+  </section>
+  <section class="theme">
+    <h2>Family, kids, and pets</h2>
+    <span class="count">10 ideas</span>
+    <div class="item"><span class="num">51</span><span class="body"><b>Family trivia quiz</b><span>: test how well everyone knows each other</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">52</span><span class="body"><b>Chore chart</b><span>: assign tasks and award stars or points</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">53</span><span class="body"><b>Reward tracker</b><span>: save up points toward a treat</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">54</span><span class="body"><b>Pet care log</b><span>: track feeding, walks, and vet dates</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">55</span><span class="body"><b>Baby tracker</b><span>: note feeds and naps through the day</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">56</span><span class="body"><b>Reading log for kids</b><span>: log books read and unlock stickers</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">57</span><span class="body"><b>Shared family recipes</b><span>: a collection everyone can add to</span></span><span class="pill hard">hard</span></div>
+    <div class="item"><span class="num">58</span><span class="body"><b>Birthday and event board</b><span>: keep the family's important dates</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">59</span><span class="body"><b>Chore-of-the-day picker</b><span>: randomly assign the day's job</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">60</span><span class="body"><b>Grandkids' art gallery</b><span>: upload drawings with captions</span></span><span class="pill medium">medium</span></div>
+  </section>
+  <section class="theme">
+    <h2>Productivity and organizing</h2>
+    <span class="count">10 ideas</span>
+    <div class="item"><span class="num">61</span><span class="body"><b>To-do list</b><span>: tasks with priorities and a "done" view</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">62</span><span class="body"><b>Daily planner</b><span>: block out your day hour by hour</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">63</span><span class="body"><b>Focus timer</b><span>: a Pomodoro clock with work and break rounds</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">64</span><span class="body"><b>Sticky-note board</b><span>: pin quick notes you can rearrange</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">65</span><span class="body"><b>Reading list</b><span>: keep track of what you want to read next</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">66</span><span class="body"><b>Bookmark dashboard</b><span>: your favorite links on one tidy page</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">67</span><span class="body"><b>Meeting notes template</b><span>: an agenda and notes layout you reuse</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">68</span><span class="body"><b>Decision matrix</b><span>: score options against criteria to compare them</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">69</span><span class="body"><b>Weekly review checklist</b><span>: run through the same questions each week</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">70</span><span class="body"><b>Keep-in-touch reminder</b><span>: nudge you on who to call or message</span></span><span class="pill medium">medium</span></div>
+  </section>
+  <section class="theme">
+    <h2>Learning, memory, and language</h2>
+    <span class="count">10 ideas</span>
+    <div class="item"><span class="num">71</span><span class="body"><b>Flashcards</b><span>: study cards that resurface the ones you miss</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">72</span><span class="body"><b>Math practice</b><span>: timed drills for kids (times tables and more)</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">73</span><span class="body"><b>Word a day</b><span>: build vocabulary with a new word each visit</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">74</span><span class="body"><b>Typing speed test</b><span>: measure words per minute and accuracy</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">75</span><span class="body"><b>Quiz maker</b><span>: write your own questions, then take the quiz</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">76</span><span class="body"><b>Travel phrasebook</b><span>: handy phrases for a language you pick</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">77</span><span class="body"><b>Memory match</b><span>: flip cards to find pairs and beat your time</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">78</span><span class="body"><b>Study timer</b><span>: focus sessions with reminders to take breaks</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">79</span><span class="body"><b>Explain-it-simply playground</b><span>: ask an AI to explain any topic plainly</span></span><span class="pill hard">hard</span></div>
+    <div class="item"><span class="num">80</span><span class="body"><b>On this day</b><span>: show facts or events for today's date</span></span><span class="pill medium">medium</span></div>
+  </section>
+  <section class="theme">
+    <h2>Hobbies, making, and creativity</h2>
+    <span class="count">10 ideas</span>
+    <div class="item"><span class="num">81</span><span class="body"><b>Book and film log</b><span>: rate and review what you read and watch</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">82</span><span class="body"><b>Tasting journal</b><span>: notes and scores for wine, coffee, or beer</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">83</span><span class="body"><b>Craft project tracker</b><span>: follow progress on knitting or other makes</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">84</span><span class="body"><b>Photo gallery</b><span>: a simple grid of pictures with captions</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">85</span><span class="body"><b>Quote of the day</b><span>: show a fresh quote or poem each visit</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">86</span><span class="body"><b>Color palette maker</b><span>: generate color schemes for a project</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">87</span><span class="body"><b>Doodle pad</b><span>: a blank canvas to sketch in the browser</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">88</span><span class="body"><b>Practice log</b><span>: track instrument practice by piece and minutes</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">89</span><span class="body"><b>Collection catalog</b><span>: list a collection (stamps, coins, records)</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">90</span><span class="body"><b>Story prompt generator</b><span>: spark ideas for writers</span></span><span class="pill easy">easy</span></div>
+  </section>
+  <section class="theme">
+    <h2>Games, quizzes, and just-for-fun</h2>
+    <span class="count">10 ideas</span>
+    <div class="item"><span class="num">91</span><span class="body"><b>Word ladder puzzle</b><span>: change one letter at a time to reach a target word</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">92</span><span class="body"><b>Number guessing game</b><span>: guess the hidden number with hot-or-cold hints</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">93</span><span class="body"><b>Trivia game</b><span>: answer questions and keep score</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">94</span><span class="body"><b>Dice and card roller</b><span>: rolls and draws for board-game night</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">95</span><span class="body"><b>Would you rather</b><span>: a deck of fun either-or questions</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">96</span><span class="body"><b>Bingo card maker</b><span>: generate cards for the screen or printing</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">97</span><span class="body"><b>Rock paper scissors</b><span>: play against the computer</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">98</span><span class="body"><b>Affirmation generator</b><span>: a kind message at the press of a button</span></span><span class="pill easy">easy</span></div>
+    <div class="item"><span class="num">99</span><span class="body"><b>Tic-tac-toe</b><span>: classic noughts and crosses versus a friend or the computer</span></span><span class="pill medium">medium</span></div>
+    <div class="item"><span class="num">100</span><span class="body"><b>Magic 8-ball</b><span>: shake for a playful answer to any question</span></span><span class="pill easy">easy</span></div>
+  </section>
+
+  <footer>
+    Building with AI &middot; <b>Yusuf Pisan</b> &middot; <a href="mailto:yusuf.pisan@gmail.com">yusuf.pisan@gmail.com</a>
+  </footer>
+</div>
+</body>
+</html>
